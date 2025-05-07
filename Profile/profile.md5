@@ -1,0 +1,308 @@
+# Информация о пользователе
+
+#[путь до swagger](./Profile\swagger3.0)
+
+## Общая информация
+
+С помощью методов API из этого раздела вы можете получить информацию о вашем
+профиле: имя, телефон, электронный адрес, ссылку на профиль, а ещё — историю
+списаний и пополнение Авито кошелька, а также его текущий баланс.
+
+Получить данные о других пользователях с помощью этих методов нельзя.
+
+## Список методов:
+
+**[Получение истории операций пользователя](https://developers.avito.ru/api-catalog/user/documentation#operation/postOperationsHistory)**
+Получить историю операций пользователя (списания и пополнение Авито кошелька)
+за определенный период времени
+
+**[Получение информации об авторизованном пользователе](https://developers.avito.ru/api-catalog/user/documentation#operation/getUserInfoSelf)**
+Получить данные пользователя
+
+**[Получение баланса кошелька пользователя](https://developers.avito.ru/api-catalog/user/documentation#operation/getUserBalance)**
+Узнать баланс Авито кошелька: сколько денег и бонусов на счёте у пользователя
+
+- Authentication
+- Пользователь
+  - API для получения баланса кошелька пользователя, истории операций и инфорации об авторизованном пользователе
+  - Типы авторизации
+  - postПолучение истории операций пользователя
+  - getПолучение информации об авторизованном пользователе
+  - getПолучение баланса кошелька пользователя
+
+[Documentation Powered by ReDoc](https://github.com/Redocly/redoc)
+
+# Информация о пользователе (1)
+
+Download OpenAPI specification: [Download](blob:https://developers.avito.ru/3d18d70c-682e-451e-ad30-1d56835db72a)
+
+E-mail: [supportautoload@avito.ru](mailto:supportautoload@avito.ru)
+
+API для получения баланса кошелька пользователя, истории операций и инфорации об авторизованном пользователе
+**Авито API для бизнеса предоставляется согласно [Условиям использования](https://www.avito.ru/legal/pro_tools/public-api).**
+
+# [section/Authentication](https://developers.avito.ru/api-catalog/user/documentation\#section/Authentication) Authentication
+
+## AuthorizationCode
+
+Это API использует OAuth 2 с механизмом authorization\_code. Используйте его для доступа к данным других пользователей при разработке стороннего приложения. [Подробнее](https://developers.avito.ru/api-catalog/auth/documentation#tag/ApplicationAccess)
+
+| Security Scheme Type | OAuth2 |
+| authorizationCode OAuth Flow | **Authorization URL:** https://avito.ru/oauth<br>**Token URL:** https://api.avito.ru/token<br>**Scopes:**<br>- `autoload:reports` \- <br>  Получение отчетов Автозагрузки<br>  <br>- `items:apply_vas` \- <br>  Применение дополнительных услуг<br>  <br>- `items:info` \- <br>  Получение информации об объявлениях<br>  <br>- `job:applications` \- <br>  Получение информации об откликах на вакансии<br>  <br>- `job:cv` \- <br>  Получение информации резюме<br>  <br>- `job:write` \- <br>  Изменение объявлений вертикали Работа<br>  <br>- `messenger:read` \- <br>  Чтение сообщений в мессенджере Авито<br>  <br>- `messenger:write` \- <br>  Модифицирование сообщений в мессенджере Авито<br>  <br>- `short_term_rent:read` \- <br>  Получение информации об объявлениях краткосрочной аренды<br>  <br>- `short_term_rent:write` \- <br>  Изменение объявлений краткосрочной аренды<br>  <br>- `stats:read` \- <br>  Получение статистики объявлений<br>  <br>- `user:read` \- <br>  Получение информации о пользователе<br>  <br>- `user_balance:read` \- <br>  Получение баланса пользователя<br>  <br>- `user_operations:read` \- <br>  Получение истории операций пользователя |
+
+## ClientCredentials
+
+Это API использует OAuth 2 с механизмом client\_credentials. Используйте его для доступа к возможностям своей личной учетной записи. [Подробнее](https://developers.avito.ru/api-catalog/user/documentation#tag/Access)
+
+| Security Scheme Type | OAuth2 |
+| clientCredentials OAuth Flow | **Token URL:** https://api.avito.ru/token<br>**Scopes:** |
+
+# [tag/User](https://developers.avito.ru/api-catalog/user/documentation\#tag/User) Пользователь
+
+# [section/API-dlya-polucheniya-balansa-koshelka-polzovatelya-istorii-operacij-i-inforacii-ob-avtorizovannom-polzovatele](https://developers.avito.ru/api-catalog/user/documentation\#section/API-dlya-polucheniya-balansa-koshelka-polzovatelya-istorii-operacij-i-inforacii-ob-avtorizovannom-polzovatele) API для получения баланса кошелька пользователя, истории операций и инфорации об авторизованном пользователе
+
+Описание API произведено в формате [**Swagger 3.0**](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md).
+Вы можете использовать данный файл для ознакомления с методами API, а также для генерации базового кода для работы с API на удобном для вас языке программирования с помощью утилиты [**Swagger Codegen**](https://swagger.io/swagger-codegen/) или online сервиса [**Swagger Editor**](https://editor.swagger.io/).
+
+**Авито API для бизнеса предоставляется согласно [Условиям использования](https://www.avito.ru/legal/pro_tools/public-api).**
+По всем вопросам работы с API необходимо обращаться в Службу Поддержки профессиональных инструментов:
+
+телефон: **+7 495 777-10-66**
+email: [supportautoload@avito.ru](mailto:supportautoload@avito.ru)
+
+# [section/Tipy-avtorizacii](https://developers.avito.ru/api-catalog/user/documentation\#section/Tipy-avtorizacii) Типы авторизации
+
+Для использования данного API запрос должен быть авторизован. В данный момент API Авито использует следующие механизмы авторизации.
+
+## AuthorizationCode
+
+Это API использует OAuth 2 с механизмом authorization\_code. Используйте его для доступа к данным других пользователей при разработке стороннего приложения. [Подробнее](https://developers.avito.ru/api-catalog/auth/documentation#tag/ApplicationAccess)
+
+| Security Scheme Type | OAuth2 |
+| authorizationCode OAuth Flow | **Authorization URL:** https://avito.ru/oauth<br>**Token URL:** https://api.avito.ru/token<br>**Scopes:**<br>- `autoload:reports` \- <br>  Получение отчетов Автозагрузки<br>  <br>- `items:apply_vas` \- <br>  Применение дополнительных услуг<br>  <br>- `items:info` \- <br>  Получение информации об объявлениях<br>  <br>- `job:applications` \- <br>  Получение информации об откликах на вакансии<br>  <br>- `job:cv` \- <br>  Получение информации резюме<br>  <br>- `job:write` \- <br>  Изменение объявлений вертикали Работа<br>  <br>- `messenger:read` \- <br>  Чтение сообщений в мессенджере Авито<br>  <br>- `messenger:write` \- <br>  Модифицирование сообщений в мессенджере Авито<br>  <br>- `short_term_rent:read` \- <br>  Получение информации об объявлениях краткосрочной аренды<br>  <br>- `short_term_rent:write` \- <br>  Изменение объявлений краткосрочной аренды<br>  <br>- `stats:read` \- <br>  Получение статистики объявлений<br>  <br>- `user:read` \- <br>  Получение информации о пользователе<br>  <br>- `user_balance:read` \- <br>  Получение баланса пользователя<br>  <br>- `user_operations:read` \- <br>  Получение истории операций пользователя |
+
+## ClientCredentials
+
+Это API использует OAuth 2 с механизмом client\_credentials. Используйте его для доступа к возможностям своей личной учетной записи. [Подробнее](https://developers.avito.ru/api-catalog/user/documentation#tag/Access)
+
+| Security Scheme Type | OAuth2 |
+| clientCredentials OAuth Flow | **Token URL:** https://api.avito.ru/token<br>**Scopes:** |
+
+Подробнее о каждом механизме и его назначении можно прочитать в соответствующем разделе.
+
+## [operation/postOperationsHistory](https://developers.avito.ru/api-catalog/user/documentation\#operation/postOperationsHistory) Получение истории операций пользователя
+
+Возвращает список операций пользователя (списания/пополнение кошелька \- деньги и бонусы) за определенный временной период (задается пользователем)
+
+##### Authorizations:
+
+( `user_operations:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| dateTimeFrom<br>required | string <date-time> <br>Время выборки от. Не далее одного года в прошлое от текущего момента. |
+| dateTimeTo<br>required | string <date-time> <br>Время выборки до (диапазон между dateTimeFrom и dateTimeTo должен быть не более одной недели) |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**401**
+Требуется аутентификация
+
+**500**
+Внутренняя ошибка метода API
+
+**503**
+Метод API временно недоступен
+
+post/core/v1/accounts/operations\_history/
+
+https://api.avito.ru/core/v1/accounts/operations\_history/
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"dateTimeFrom": "2020-04-01T00:00:00",
+"dateTimeTo": "2020-04-08T00:00:00"}`
+
+### Response samples
+
+- 200
+- 401
+- 500
+- 503
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"operations": [\
+{\
+"amountBonus": 0,\
+"amountRub": 119,\
+"amountTotal": 119,\
+"itemId": 1853257996,\
+"operationName": "Резервирование средств. Услуга «Сделать XL объявлением» для объявления №1853257996",\
+"operationType": "резервирование средств под услугу",\
+"serviceId": 16,\
+"serviceName": "Сделать XL объявлением",\
+"serviceType": "vas",\
+"updatedAt": "2020-04-27T10:51:50.012436+03:00"}]}`
+
+## [operation/getUserInfoSelf](https://developers.avito.ru/api-catalog/user/documentation\#operation/getUserInfoSelf) Получение информации об авторизованном пользователе
+
+Возвращает идентификатор пользователя и его регистрационные данные
+
+##### Authorizations:
+
+( `user:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**401**
+Требуется аутентификация
+
+**403**
+Неверный Token/Oauth Scope
+
+**500**
+Внутренняя ошибка метода API
+
+**503**
+Метод API временно недоступен
+
+get/core/v1/accounts/self
+
+https://api.avito.ru/core/v1/accounts/self
+
+### Response samples
+
+- 200
+- 401
+- 403
+- 500
+- 503
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"email": "example@domain.com",
+"id": 94235311,
+"name": "Петр",
+"phone": 71112223344,
+"phones": [\
+"71112223344"],
+"profile_url": "https://avito.ru/user/7d04cdc3a12726eee72c6851c953ac54/profile"}`
+
+## [operation/getUserBalance](https://developers.avito.ru/api-catalog/user/documentation\#operation/getUserBalance) Получение баланса кошелька пользователя
+
+Возвращает сумму реальных денежных средств в кошельке, а также сумму бонусных средств
+
+##### Authorizations:
+
+( `user_balance:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Идентификатор пользователя (клиента) |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**401**
+Требуется аутентификация
+
+**403**
+Неверный Token/Oauth Scope
+
+**404**
+Неверный user\_id в запросе
+
+**500**
+Внутренняя ошибка метода API
+
+**503**
+Метод API временно недоступен
+
+get/core/v1/accounts/{user\_id}/balance/
+
+https://api.avito.ru/core/v1/accounts/{user\_id}/balance/
+
+### Response samples
+
+- 200
+- 401
+- 403
+- 404
+- 500
+- 503
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"bonus": 0,
+"real": 0}`
+
+## История обновления версий
+
+## 2024-11-08
+
+### Added
+
+Для запроса `/core/v1/accounts/self` в тело объекта добавлено поле `phones` c номерами телефонов
+
+[Условия использования Авито](https://support.avito.ru/articles/200026948) · [Политика о данных пользователей](https://www.avito.ru/safety/personal/company) · [Условия использования API](https://developers.avito.ru/docs/APITermsOfServiceV1.pdf)
+
+Авито — сайт объявлений России. © ООО «КЕХ еКоммерц» 2007–2025.
