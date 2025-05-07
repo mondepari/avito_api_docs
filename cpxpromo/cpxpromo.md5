@@ -1,0 +1,500 @@
+# Настройка цены целевого действия
+
+#[путь до swagger](./cpxpromo\swagger3.0)
+
+# Общая информация
+
+Настройка цены целевого действия — это новый для Авито тип продвижения. Вы выбираете цену, которую готовы заплатить за целевое действие будущего клиента — просмотр, отклик, звонок или чат. Чем она выше, тем больше внимания получит ваше объявление и большее количество конкурентов обойдёт. [Подробности](https://www.avito.ru/business/cpx_promo)
+
+Сейчас настройка цены целевого действия работает в тестовом режиме и доступна не всем. Мы отправили электронные письма тем, кто может ей воспользоваться.
+
+- Authentication
+- Настройка цены целевого действия
+  - API настройки цены целевого действия — это набор методов, которые помогут настроить цену целевого действия, бюджет и лимит трат и запустить продвижение одного или нескольких объявлений. Через этот API можно организовать интеграцию между Авито и сторонней системой в обе стороны.
+  - Типы авторизации
+- getПолучение детализированной информации о действующих и доступных ставках и бюджетах
+- postПолучение текущих цен просмотра и бюджетов по нескольким объявлениям
+- postОстановка продвижения
+- postНастройка автоматического продвижения
+- postУстановка ручной ставки продвижения
+
+[Documentation Powered by ReDoc](https://github.com/Redocly/redoc)
+
+# Настройка цены целевого действия (1)
+
+Download OpenAPI specification: [Download](blob:https://developers.avito.ru/07faf179-b549-4763-b7c0-4da02fd1d005)
+
+Методы для работы с настройками цены целевого действия.
+
+**Авито API для бизнеса предоставляется согласно [Условиям использования](https://www.avito.ru/legal/pro_tools/public-api).**
+
+# [section/Authentication](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#section/Authentication) Authentication
+
+## AuthorizationCode
+
+Это API использует OAuth 2 с механизмом authorization\_code. Используйте его для доступа к данным других пользователей при разработке стороннего приложения. [Подробнее](https://developers.avito.ru/api-catalog/cpxpromo/documentation#tag/ApplicationAccess)
+
+| Security Scheme Type | OAuth2 |
+| authorizationCode OAuth Flow | **Authorization URL:** https://avito.ru/oauth<br>**Token URL:** https://api.avito.ru/token<br>**Scopes:**<br>- `cpxpromo:edit` \- <br>  Редактирование ставок<br>  <br>- `cpxpromo:read` \- <br>  Получение ставок |
+
+## ClientCredentials
+
+Это API использует OAuth 2 с механизмом client\_credentials. Используйте его для доступа к возможностям своей личной учетной записи. [Подробнее](https://developers.avito.ru/api-catalog/cpxpromo/documentation#tag/Access)
+
+| Security Scheme Type | OAuth2 |
+| clientCredentials OAuth Flow | **Token URL:** https://api.avito.ru/token<br>**Scopes:** |
+
+# [tag/Nastrojka-ceny-celevogo-dejstviya](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#tag/Nastrojka-ceny-celevogo-dejstviya) Настройка цены целевого действия
+
+# [section/API-nastrojki-ceny-celevogo-dejstviya-eto-nabor-metodov-kotorye-pomogut-nastroit-cenu-celevogo-dejstviya-byudzhet-i-limit-trat-i-zapustit-prodvizhenie-odnogo-ili-neskolkih-obuyavlenij.-Cherez-etot-API-mozhno-organizovat-integraciyu-mezhdu-Avito-i-storonnej-sistemoj-v-obe-storony.](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#section/API-nastrojki-ceny-celevogo-dejstviya-eto-nabor-metodov-kotorye-pomogut-nastroit-cenu-celevogo-dejstviya-byudzhet-i-limit-trat-i-zapustit-prodvizhenie-odnogo-ili-neskolkih-obuyavlenij.-Cherez-etot-API-mozhno-organizovat-integraciyu-mezhdu-Avito-i-storonnej-sistemoj-v-obe-storony.) API настройки цены целевого действия — это набор методов, которые помогут настроить цену целевого действия, бюджет и лимит трат и запустить продвижение одного или нескольких объявлений. Через этот API можно организовать интеграцию между Авито и сторонней системой в обе стороны.
+
+Описание API произведено в формате [**Swagger 3.0**](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md).
+Вы можете использовать данный файл для ознакомления с методами API, а также для генерации базового кода для работы с API на удобном для вас языке программирования с помощью утилиты
+[**Swagger Codegen**](https://swagger.io/swagger-codegen/) или online сервиса [**Swagger Editor**](https://editor.swagger.io/).
+
+**Авито API для бизнеса предоставляется согласно [Условиям использования](https://www.avito.ru/legal/pro_tools/public-api).**
+По всем вопросам работы с API необходимо обращаться в Службу Поддержки профессиональных инструментов:
+
+телефон: **+7 495 777-10-66**
+email: [supportautoload@avito.ru](mailto:supportautoload@avito.ru)
+
+# [section/Tipy-avtorizacii](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#section/Tipy-avtorizacii) Типы авторизации
+
+Для использования данного API запрос должен быть авторизован. В данный момент API Авито использует следующие механизмы авторизации.
+
+## [operation/getBids](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#operation/getBids) Получение детализированной информации о действующих и доступных ставках и бюджетах
+
+Метод позволяет получить детализированную информацию о действующих и доступных ценах целевого действия (в копейках), бюджетах (в копейках) и преимуществах перед конкурентами.
+Максимальное количество запросов в минуту \- 400
+
+##### Authorizations:
+
+( `cpxpromo:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| itemId<br>required | integer |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+### Responses
+
+**200**
+Ok
+
+**400**
+Bad request
+
+**401**
+Unauthorized
+
+**429**
+Превышено допустимое количество запросов
+
+**500**
+Internal Error
+
+get/cpxpromo/1/getBids/{itemId}
+
+https://api.avito.ru/cpxpromo/1/getBids/{itemId}
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 429
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"actionTypeID": 0,
+"auto": {
+"budgetPenny": 0,
+"budgetType": "string",
+"dailyBudget": {
+"budgets": [\
+{\
+"compare": 0,\
+"maxForecast": 0,\
+"minForecast": 0,\
+"valuePenny": 0}],
+"maxLimitPenny": 0,
+"minLimitPenny": 0,
+"recBudgetPenny": 0},
+"maxBudgetPenny": 0,
+"minBudgetPenny": 0,
+"monthlyBudget": {
+"budgets": [\
+{\
+"compare": 0,\
+"maxForecast": 0,\
+"minForecast": 0,\
+"valuePenny": 0}],
+"maxLimitPenny": 0,
+"minLimitPenny": 0,
+"recBudgetPenny": 0},
+"weeklyBudget": {
+"budgets": [\
+{\
+"compare": 0,\
+"maxForecast": 0,\
+"minForecast": 0,\
+"valuePenny": 0}],
+"maxLimitPenny": 0,
+"minLimitPenny": 0,
+"recBudgetPenny": 0}},
+"manual": {
+"bidPenny": 0,
+"bids": [\
+{\
+"compare": 0,\
+"maxForecast": 0,\
+"minForecast": 0,\
+"valuePenny": 0}],
+"limitPenny": 0,
+"maxBidPenny": 0,
+"maxLimitPenny": 0,
+"minBidPenny": 0,
+"minLimitPenny": 0,
+"recBidPenny": 0},
+"selectedType": "string"}`
+
+## [operation/getPromotionsByItemIds](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#operation/getPromotionsByItemIds) Получение текущих цен просмотра и бюджетов по нескольким объявлениям
+
+Метод позволяет получить текущие цены целевого действия (в копейках) и бюджеты (в копейках) по нескольким объявлениям.
+Максимальное количество передаваемых объявлений \- 200.
+Максимальное количество запросов в минуту \- 400.
+
+##### Authorizations:
+
+( `cpxpromo:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| itemIDs<br>required | Array of integers \[ 1 .. 200 \] items |
+
+### Responses
+
+**200**
+Ok
+
+**400**
+Bad request
+
+**401**
+Unauthorized
+
+**429**
+Превышено допустимое количество запросов
+
+**500**
+Internal Error
+
+post/cpxpromo/1/getPromotionsByItemIds
+
+https://api.avito.ru/cpxpromo/1/getPromotionsByItemIds
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"itemIDs": [\
+1]}`
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 429
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"items": [\
+{\
+"actionTypeID": 0,\
+"autoPromotion": {\
+"budgetPenny": 0,\
+"budgetType": "string"},\
+"itemID": 0,\
+"manualPromotion": {\
+"bidPenny": 0,\
+"limitPenny": 0}}]}`
+
+## [operation/removePromotion](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#operation/removePromotion) Остановка продвижения
+
+Метод позволяет остановить продвижение и переключиться на цены из прайс\-листа.
+Максимальное количество запросов в минуту \- 300
+
+##### Authorizations:
+
+( `cpxpromo:edit`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| itemID<br>required | integer<br>Идентификатор объявления |
+
+### Responses
+
+**200**
+Ok
+
+**400**
+Bad request
+
+**401**
+Unauthorized
+
+**429**
+Превышено допустимое количество запросов
+
+**500**
+Internal Error
+
+post/cpxpromo/1/remove
+
+https://api.avito.ru/cpxpromo/1/remove
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"itemID": 123456789}`
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 429
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"message": "Ваше объявление теперь тарифицируется по базовой ставке"}`
+
+## [operation/saveAutoBid](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#operation/saveAutoBid) Настройка автоматического продвижения
+
+Метод позволяет установить бюджет (в копейках) и срок, за который потратится этот бюджет ("1d" — сутки; "7d" — неделя; "30d" — месяц). Бюджет указывать необязательно.
+
+Автоматическое продвижение пока что нельзя запустить в категории «Транспорт»
+
+Максимальное количество запросов в минуту \- 10.
+
+##### Authorizations:
+
+( `cpxpromo:edit`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| actionTypeID<br>required | integer<br>Тип события (1 - звонок \| 5 - пакет кликов \| 7 - мессенджер, передача контакта в чате) |
+| budgetPenny<br>required | integer<br>Текущий бюджет в копейках |
+| budgetType<br>required | string<br>Тип бюджета ("1d" - дневной \| "7d" - недельный \| "30d" - месячный) |
+| itemID<br>required | integer<br>Идентификатор объявления |
+
+### Responses
+
+**200**
+Ok
+
+**400**
+Bad request
+
+**401**
+Unauthorized
+
+**429**
+Превышено допустимое количество запросов
+
+**500**
+Internal Error
+
+post/cpxpromo/1/setAuto
+
+https://api.avito.ru/cpxpromo/1/setAuto
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"actionTypeID": 5,
+"budgetPenny": 1400,
+"budgetType": "1d",
+"itemID": 123456789}`
+
+### Response samples
+
+- 400
+- 401
+- 429
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"message": "Что-то пошло не так"}`
+
+## [operation/saveManualBid](https://developers.avito.ru/api-catalog/cpxpromo/documentation\#operation/saveManualBid) Установка ручной ставки продвижения
+
+Метод позволяет установить цену просмотра и лимит трат (обе суммы нужно указать в копейках).
+
+Цена целевого действия должна быть больше минимальной цены (посмотреть минимальную цену можно в ручке получения ставок). Лимит трат указывать необязательно.
+
+Максимальное количество запросов в минуту \- 300.
+
+##### Authorizations:
+
+( `cpxpromo:edit`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| actionTypeID<br>required | integer<br>Тип события (1 - звонок \| 5 - пакет кликов \| 7 - мессенджер, передача контакта в чате) |
+| bidPenny<br>required | integer<br>Текущая ставка в копейках |
+| itemID<br>required | integer<br>Идентификатор объявления |
+| limitPenny | integer Nullable <br>Дневной лимит в копейках |
+
+### Responses
+
+**200**
+Ok
+
+**400**
+Bad request
+
+**401**
+Unauthorized
+
+**429**
+Превышено допустимое количество запросов
+
+**500**
+Internal Error
+
+post/cpxpromo/1/setManual
+
+https://api.avito.ru/cpxpromo/1/setManual
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"actionTypeID": 5,
+"bidPenny": 1400,
+"itemID": 123456789,
+"limitPenny": 192400}`
+
+### Response samples
+
+- 400
+- 401
+- 429
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"message": "Что-то пошло не так"}`
+
+[Условия использования Авито](https://support.avito.ru/articles/200026948) · [Политика о данных пользователей](https://www.avito.ru/safety/personal/company) · [Условия использования API](https://developers.avito.ru/docs/APITermsOfServiceV1.pdf)
+
+Авито — сайт объявлений России. © ООО «КЕХ еКоммерц» 2007–2025.
