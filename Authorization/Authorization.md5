@@ -1,0 +1,401 @@
+# Авторизация
+
+#[путь до Swagger](./Authorization\swagger3.0)
+
+## Общая информация
+
+С помощью методов из этого раздела вы сможете получить доступ к API, чтобы
+настроить интеграцию с Авито или пользоваться уже настроенной интеграцией.
+
+## Список методов:
+
+**_client\_credentials_** (персональная авторизация)
+
+**Как пользоваться:**
+
+1. В личном кабинете получите client\_id и сlient\_secret.
+2. Укажите полученные данные и тип авторизации «client\_credentials» и отправьте
+запрос к методу token.
+3. Полученный токен доступа используйте при обращении по API в заголовке вида
+**Authorization: Bearer <ACCESS\_TOKEN>**
+
+Важно: время действия токена ограничено — 24 часа с момента его получения. После
+этого нужно будет запрашивать новый токен по инструкции выше.
+
+**_authorization\_code_** (авторизация других пользователей через приложение)
+
+**Как пользоваться:**
+
+1. [Зарегистрируйте приложение](https://developers.avito.ru/applications), которое будет работать с Авито по API. Укажите:
+
+
+   - имя приложения — его будут видеть другие пользователи в
+     форме подтверждения доступа;
+   - Redirect URI — ссылка на страницу сайта или приложения, на
+     которую попадёт пользователь после того, как подтвердит доступ;
+
+Важно заполнить это поле правильно: указать адрес, который
+работает по https-протоколу и сможет обрабатывать приходящие
+на него запросы, обогащённые кодом авторизации.
+
+   - описание приложения — расскажите пользователям, для чего
+     нужно ваше приложение и как оно работает;
+2. Отправьте пользователю ссылку вида
+[https://avito.ru/oauth?response\_type=code&client\_id=](https://avito.ru/oauth?response_type=code&amp;client_id=) <CLIENT\_ID>&scope=messenger:
+read,messenger:write — по ней он получит доступ к вашему приложению.
+
+
+Обратите внимание: в query параметрах указаны скоупы, доступ к которым должен
+будет одобрить пользователь. Запрашивать нужно те скоупы, которые действительно
+нужны для работы вашего приложения. Полный список доступных скоупов
+представлен ниже:
+
+- autoload:reports - Получение отчетов Автозагрузки
+- items:apply\_vas - Применение дополнительных услуг
+- items:info - Получение информации об объявлениях
+- job:cv - Получение информации резюме
+- job:applications - Получение информации об откликах на вакансии
+- job:vacancy - Работа с вакансиями
+- job:write - Изменение объявлений вертикали Работа
+- messenger:read - Чтение сообщений в мессенджере Авито
+- messenger:write - Модифицирование сообщений в мессенджере Авито
+- short\_term\_rent:read - Получение информации об объявлениях краткосрочной аренды
+- short\_term\_rent:write - Изменение объявлений краткосрочной аренды
+- stats:read - Получение статистики объявлений
+- user:read - Получение информации о пользователе
+- user\_balance:read - Получение баланса пользователя
+- user\_operations:read - Получение истории операций пользователя
+
+После одобрения пользователем доступа для приложения Авито перенаправит
+пользовательский агент (браузер) по Redirect URI, указанному при регистрации. Адрес
+в этом случае будет обогащён кодом авторизации в виде параметра code. Например,
+для Redirect URI [https://example.com/callback/avito](https://example.com/callback/avito) ссылка будет выглядеть следующим
+образом: [https://example.com/callback/avito?code=](https://example.com/callback/avito?code=) <AUTHORIZATION\_CODE>
+
+1. Чтобы получить доступ, выполните запрос к методу token со следующими
+данными:
+   - тип авторизации \- authorization\_code;
+   - client\_id приложения;
+   - client\_secret приложения;
+   - код авторизации из пункта 2.
+
+В ответе метода вы получите токен доступа (access\_token) и токен обновления
+доступа (refresh\_token).
+
+Полученный токен доступа используйте при обращении по API в заголовке вида
+Authorization: Bearer <ACCESS\_TOKEN>.
+
+Важно: время действия токена ограничено — 24 часа с момента его получения. После
+этого нужно будет запрашивать новый токен со следующими данными:
+
+- тип авторизации \- refresh\_token;
+- client\_id приложения;
+- client\_secret приложения;
+- токен обновления доступа refresh\_token из пункта 3.
+
+В ответе метода вы получите новый токен доступа (access\_token) и новый токен
+обновления доступа (refresh\_token). Время действия токена обновления доступа - 1
+год.
+
+- Authentication
+- Персональная авторизация
+  - postПолучение access token
+- Авторизация для приложений
+  - postПолучение access token
+  - postОбновление access token
+
+[Documentation Powered by ReDoc](https://github.com/Redocly/redoc)
+
+# Авторизация (1)
+
+Download OpenAPI specification: [Download](blob:https://developers.avito.ru/664e1b40-55af-464f-bfb9-dc49fd3853a4)
+
+E-mail: [supportautoload@avito.ru](mailto:supportautoload@avito.ru)
+
+Получение и обновление авторизационных токенов для персональной авторизации и авторизации приложений
+**Авито API для бизнеса предоставляется согласно [Условиям использования](https://www.avito.ru/legal/pro_tools/public-api).**
+
+# [section/Authentication](https://developers.avito.ru/api-catalog/auth/documentation\#section/Authentication) Authentication
+
+## AuthorizationCode
+
+Это API использует OAuth 2 с механизмом authorization\_code. Используйте его для доступа к данным других пользователей при разработке стороннего приложения. [Подробнее](https://developers.avito.ru/api-catalog/auth/documentation#tag/ApplicationAccess)
+
+| Security Scheme Type | OAuth2 |
+| authorizationCode OAuth Flow | **Authorization URL:** https://avito.ru/oauth<br>**Token URL:** https://api.avito.ru/token<br>**Scopes:**<br>- `autoload:reports` \- <br>  Получение отчетов Автозагрузки<br>  <br>- `items:apply_vas` \- <br>  Применение дополнительных услуг<br>  <br>- `items:info` \- <br>  Получение информации об объявлениях<br>  <br>- `job:applications` \- <br>  Получение информации об откликах на вакансии<br>  <br>- `job:cv` \- <br>  Получение информации резюме<br>  <br>- `job:vacancy` \- <br>  Работа с вакансиями<br>  <br>- `job:write` \- <br>  Изменение объявлений вертикали Работа<br>  <br>- `messenger:read` \- <br>  Чтение сообщений в мессенджере Авито<br>  <br>- `messenger:write` \- <br>  Модифицирование сообщений в мессенджере Авито<br>  <br>- `short_term_rent:read` \- <br>  Получение информации об объявлениях краткосрочной аренды<br>  <br>- `short_term_rent:write` \- <br>  Изменение объявлений краткосрочной аренды<br>  <br>- `stats:read` \- <br>  Получение статистики объявлений<br>  <br>- `user:read` \- <br>  Получение информации о пользователе<br>  <br>- `user_balance:read` \- <br>  Получение баланса пользователя<br>  <br>- `user_operations:read` \- <br>  Получение истории операций пользователя |
+
+## ClientCredentials
+
+Это API использует OAuth 2 с механизмом client\_credentials. Используйте его для доступа к возможностям своей личной учетной записи. [Подробнее](https://developers.avito.ru/api-catalog/auth/documentation#tag/Access)
+
+| Security Scheme Type | OAuth2 |
+| clientCredentials OAuth Flow | **Token URL:** https://api.avito.ru/token<br>**Scopes:** |
+
+# [tag/Access](https://developers.avito.ru/api-catalog/auth/documentation\#tag/Access) Персональная авторизация
+
+Для работы с API от своего лица необходимо получить токен авторизации — отдельный для каждой учетной записи на Авито.
+
+1. Получаем **client\_id** и **client\_secret** в [личном кабинете](https://www.avito.ru/professionals/api)
+
+2. Выписываем себе токен:
+
+
+```
+curl -L -X POST 'https://api.avito.ru/token/' \
+       -H 'Content-Type: application/x-www-form-urlencoded' \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode 'client_id=<CLIENT_ID>' \
+       --data-urlencode 'client_secret=<CLIENT_SECRET>'
+```
+
+3. Далее выполняем запросы к API с заголовком `Authorization: Bearer <ACCESS_TOKEN>`
+
+Время действия токена ограничено \- 24 часа с момента его получения.
+После этого вам необходимо получить новый токен.
+
+
+## [operation/getAccessToken](https://developers.avito.ru/api-catalog/auth/documentation\#operation/getAccessToken) Получение access token
+
+Получения временного ключа для авторизации
+
+##### Request Body schema: application/x-www-form-urlencoded
+
+|     |     |
+| --- | --- |
+| client\_id<br>required | string |
+| client\_secret<br>required | string |
+| grant\_type<br>required | string<br>Default: "client\_credentials" |
+
+### Responses
+
+**200**
+Успешный ответ
+
+post/token
+
+https://api.avito.ru/token
+
+### Response samples
+
+- 200
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"access_token": "kChqt9ewQNAcwgbHp4yFd5",
+"expires_in": 86400,
+"token_type": "Bearer"}`
+
+# [tag/ApplicationAccess](https://developers.avito.ru/api-catalog/auth/documentation\#tag/ApplicationAccess) Авторизация для приложений
+
+Для работы с API приложений от лица пользователя есть возможность получить токен через Authorization Code механизм протокола OAuth2. Для этого в первую очередь нужно зарегистрировать приложение на [https://developers.avito.ru/applications](https://developers.avito.ru/applications). После успешной регистрации ваше приложение получит возможность работать с API Авито от лица пользователя (если последний выдаст на это разрешение).
+
+Подробнее об Authorization Code флоу протокола OAuth2 можно почитать [в статье](https://www.digitalocean.com/community/tutorials/oauth-2-ru). Процесс работы с этим флоу в API Авито отличается только незначительными деталями – ниже по шагам описан процесс интеграции.
+
+### Шаг 1: Регистрация приложения
+
+Регистрируем приложение через [https://developers.avito.ru/application](https://developers.avito.ru/application). Для регистрации нужно указать:
+
+- Имя приложения, которое будет выводиться пользователям в форме подтверждения прав
+- Redirect URI - адрес, на который сайт Авито средиректит пользователя после подтверждения прав
+- Скоупы, которые необходимы вашему приложению (подробнее о доступных скоупах ниже)
+- Описание приложения \- для каких целей вы планируете использовать доступ к данным
+
+В данный момент мы регистрируем только доверенные приложения от наших партнеров.
+
+Скоупы определяют права, на которые ваше приложение сможет рассчитывать после подверждения авторизации пользователем. Доступные скоупы:
+
+- messenger:read: Чтение сообщений в мессенджере Авито
+- messenger:write: Модифицирование сообщений в мессенджере Авито
+- user\_balance:read: Получение баланса пользователя
+- job:write: Изменение объявлений вертикали Работа
+- job:cv: Получение информации резюме
+- job:vacancy: Работа с вакансиями
+- job:applications: Получение информации об откликах на вакансии
+- user\_operations:read: Получение истории операций пользователя
+- user:read: Получение информации о пользователе
+- autoload:reports: Получение отчетов Автозагрузки
+- items:info: Получение информации об объявлениях
+- items:apply\_vas: Применение дополнительных услуг
+- short\_term\_rent:read: Получение информации об объявлениях краткосрочной аренды
+- short\_term\_rent:write: Изменение объявлений краткосрочной аренды
+- stats:read: Получение статистики объявлений
+
+### Шаг 2: Ссылка с кодом авторизации
+
+
+Сначала пользователю предоставляется ссылка следующего вида:
+
+```
+https://avito.ru/oauth?response_type=code&client_id=<CLIENT_ID>&scope=messenger:read,messenger:write
+```
+
+### Шаг 3: Пользователь авторизует приложение
+
+Пользователь переходит по ссылке на Авито, аутентифицируется при необходимости, затем подтверждает выдачу необходимых прав вашему приложению.
+
+### Шаг 4: Приложение получает код авторизации
+
+Если пользователь выбирает "Авторизовать приложение", Авито перенаправляет пользовательский агент (браузер) по URI перенаправления (Redirect URI), который был задан на этапе регистрации приложения и добавляет в него параметр `code`. Например, если при регистрации в качестве Redirect URI был указан адрес `https://example.com/callback/avito`, то мы перенаправим пользователя на:
+
+```
+https://example.com/callback/avito?code=<AUTHORIZATION_CODE>
+```
+
+### Шаг 5: Приложение запрашивает токен доступа
+
+Приложение запрашивает токен доступа у API Авито путём отправки авторизационного кода и аутентификационной информации (включая секрет приложения). Ниже представлен пример POST-запроса для получения access token:
+
+```
+     curl -L -X POST 'https://api.avito.ru/token/' \
+         -H 'Content-Type: application/x-www-form-urlencoded' \
+         --data-urlencode 'grant_type=authorization_code' \
+         --data-urlencode 'client_id=<CLIENT_ID>' \
+         --data-urlencode 'client_secret=<CLIENT_SECRET>' \
+         --data-urlencode 'code=<AUTHORIZATION_CODE>'
+```
+
+### Шаг 6: Приложение получает токен доступа
+
+Если авторизация прошла успешно, API возвращает токен доступа (а также токен для обновления токена доступа - refresh token). Весь ответ сервера может выглядеть следующим образом:
+
+```
+{
+    "access_token": "<ACCESS_TOKEN>",
+    "expires_in": 86400,
+    "refresh_token": "<REFRESH_TOKEN>",
+    "scope": "messenger:read,messenger:write",
+    "token_type": "Bearer"
+}
+```
+
+Приложение сохраняет access\_token и refresh\_token.
+
+### Шаг 7: Приложение делает запросы к API c токеном доступа
+
+Далее приложение может выполнять запросы к API с заголовком `Authorization: Bearer <ACCESS_TOKEN>`
+
+### Шаг 8: Приложение обновляет access\_token
+
+Время действия access token ограничено - 24 часа с момента его получения. После этого вам необходимо получить новый токен.
+
+После истечения срока действия токена доступа все запросы к API с его использованием будут возвращать код ошибки 403. Сохраненный refresh token может быть использован для получения нового токена доступа от авторизационного сервера.
+
+Ниже представлен пример POST-запроса, использующего refresh token для обновления токена доступа:
+
+```curl
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'grant_type=refresh_token' \
+    --data-urlencode 'client_id=<CLIENT_ID>' \
+    --data-urlencode 'client_secret=<CLIENT_SECRET>' \
+    --data-urlencode 'refresh_token=<REFRESH_TOKEN>'
+```
+
+В ответ приложение получит точно такой же JSON, как и при обмене code на access token. При этом будет получен не только новый access\_token, но и новый refresh\_token. Обновите оба значения в своей базе данных.
+
+### Дополнительный параметр state
+
+Для того чтобы защитить данные пользователей мы крайне рекомендуем использовать параметр state. Этот параметр позволяет защититься от CSRF-атак и восстановить состояние вашего приложения на момент начала авторизации. Подробнее, зачем нужен параметр state, можно прочитать [тут](https://auth0.com/docs/protocols/oauth2/oauth-state).
+
+Для того, чтобы использовать state – просто включите его в начальный URL:
+
+```
+https://avito.ru/oauth?response_type=code&client_id=<CLIENT_ID>&scope=messenger:read,messenger:write&state=<STATE>
+```
+
+В итоге state будет содержаться в финальном Redirect URI, на который Авито перенаправляет пользователя после подтверждения прав доступа. Например, если при регистрации в качестве Redirect URI был указан адрес `https://example.com/callback/avito`, то мы перенаправим пользователя на:
+
+```
+https://example.com/callback/avito?code=<AUTHORIZATION_CODE>&state=<STATE>
+```
+
+Не передавайте чувствительные данные в открытом виде в этом параметре. Генерируйте уникальное временное значение state в вашем приложении.
+
+## [operation/getAccessTokenAuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation\#operation/getAccessTokenAuthorizationCode) Получение access token
+
+Получения временного ключа для авторизации запроса от лица пользователя
+
+##### Request Body schema: application/x-www-form-urlencoded
+
+|     |     |
+| --- | --- |
+| client\_id<br>required | string |
+| client\_secret<br>required | string |
+| code<br>required | string |
+| grant\_type<br>required | string<br>Default: "authorization\_code" |
+
+### Responses
+
+**200**
+Успешный ответ
+
+post/token‎
+
+https://api.avito.ru/token‎
+
+### Response samples
+
+- 200
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"access_token": "kChqt9ewQNAcwgbHp4yFd5",
+"expires_in": 86400,
+"refresh_token": "QNAcwgbHQNAcwgbHkChqt9ewQNAcwgbHp4yFd5",
+"scope": "messenger:read,messenger:write",
+"token_type": "Bearer"}`
+
+## [operation/refreshAccessTokenAuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation\#operation/refreshAccessTokenAuthorizationCode) Обновление access token
+
+Обновление временного ключа для авторизации запроса от лица пользователя
+
+##### Request Body schema: application/x-www-form-urlencoded
+
+|     |     |
+| --- | --- |
+| client\_id<br>required | string |
+| client\_secret<br>required | string |
+| grant\_type<br>required | string<br>Default: "refresh\_token"<br>Тип OAuth flow. Строка refresh\_token |
+| refresh\_token<br>required | string |
+
+### Responses
+
+**200**
+Успешный ответ
+
+post/token‎‎
+
+https://api.avito.ru/token‎‎
+
+### Response samples
+
+- 200
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"access_token": "5dFy4pHbgwcANQwe9tqhCk",
+"expires_in": 86400,
+"refresh_token": "5dFy4pHbgwcANQwe9tqhCkHbgwcANQHbgwcANQ",
+"scope": "messenger:read,messenger:write",
+"token_type": "Bearer"}`
+
+[Условия использования Авито](https://support.avito.ru/articles/200026948) · [Политика о данных пользователей](https://www.avito.ru/safety/personal/company) · [Условия использования API](https://developers.avito.ru/docs/APITermsOfServiceV1.pdf)
+
+Авито — сайт объявлений России. © ООО «КЕХ еКоммерц» 2007–2025.
