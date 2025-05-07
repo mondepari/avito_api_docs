@@ -1,0 +1,1172 @@
+# Объявления
+
+#[путь до swagger](./Adverts\swagger3.0)
+
+## Общая информация
+
+Вы сможете применять услуги продвижения к опубликованным объявлениям,
+настроить интеграцию цен: если вы обновите стоимость предложения в вашей
+системе, она автоматически обновится в объявлении на Авито, а ещё — получать
+статистику по объявлениям и услугам продвижения.
+
+По статистике видно, сколько раз объявления открывали и добавляли в избранное,
+какие услуги продвижения вы применили, а также количество целевых, пропущенных,
+новых или повторных и отмеченных как спам звонков.
+
+С помощью методов API из этого раздела можно:
+
+- применить к объявлению услугу продвижения;
+- обновить цену в объявлении;
+- узнать количество полученных, пропущенных, повторных или новых звонков по
+объявлению, а также сколько раз объявление открыли, добавили в избранное
+или связались по нему с помощью сообщений или звонков через приложение;
+- получить информацию, какие услуги продвижения были применены к вашим
+объявлениям и сколько они стоили.
+
+- Authentication
+- Объявления
+  - Типы авторизации
+  - postПолучение информации о стоимости услуг продвижения и доступных значках
+  - postПолучение статистики по звонкам
+  - getПолучение информации по объявлению
+  - putПрименение дополнительных услуг
+  - getПолучение информации по объявлениям
+  - putПрименение пакета дополнительных услуг
+  - putПрименение услуг продвижения
+  - postПолучение статистики по списку объявлений
+  - postПолучение статистических показателей по профилю
+- postОбновление цены объявления
+
+
+[Documentation Powered by ReDoc](https://github.com/Redocly/redoc)
+
+# Объявления (1)
+
+Download OpenAPI specification: [Download](blob:https://developers.avito.ru/897c94f2-45dc-4871-8918-a5a023774312)
+
+E-mail: [supportautoload@avito.ru](mailto:supportautoload@avito.ru)
+
+API для получение статистики по объявлениям, применения дополнительных услуг, а также просмотр статусов объявлений
+
+**Авито API для бизнеса предоставляется согласно [Условиям\**\
+**использования](https://www.avito.ru/legal/pro_tools/public-api).**
+
+# [section/Authentication](https://developers.avito.ru/api-catalog/item/documentation\#section/Authentication) Authentication
+
+## AuthorizationCode
+
+Это API использует OAuth 2 с механизмом authorization\_code. Используйте его для доступа к данным других пользователей при разработке стороннего приложения. [Подробнее](https://developers.avito.ru/api-catalog/auth/documentation#tag/ApplicationAccess)
+
+| Security Scheme Type | OAuth2 |
+| authorizationCode OAuth Flow | **Authorization URL:** https://avito.ru/oauth<br>**Token URL:** https://api.avito.ru/token<br>**Scopes:**<br>- `autoload:reports` \- <br>  Получение отчетов Автозагрузки<br>  <br>- `items:apply_vas` \- <br>  Применение дополнительных услуг<br>  <br>- `items:info` \- <br>  Получение информации об объявлениях<br>  <br>- `job:applications` \- <br>  Получение информации об откликах на вакансии<br>  <br>- `job:cv` \- <br>  Получение информации резюме<br>  <br>- `job:write` \- <br>  Изменение объявлений вертикали Работа<br>  <br>- `messenger:read` \- <br>  Чтение сообщений в мессенджере Авито<br>  <br>- `messenger:write` \- <br>  Модифицирование сообщений в мессенджере Авито<br>  <br>- `short_term_rent:read` \- <br>  Получение информации об объявлениях краткосрочной аренды<br>  <br>- `short_term_rent:write` \- <br>  Изменение объявлений краткосрочной аренды<br>  <br>- `stats:read` \- <br>  Получение статистики объявлений<br>  <br>- `user:read` \- <br>  Получение информации о пользователе<br>  <br>- `user_balance:read` \- <br>  Получение баланса пользователя<br>  <br>- `user_operations:read` \- <br>  Получение истории операций пользователя |
+
+## ClientCredentials
+
+Это API использует OAuth 2 с механизмом client\_credentials. Используйте его для доступа к возможностям своей личной учетной записи. [Подробнее](https://developers.avito.ru/api-catalog/item/documentation#tag/Access)
+
+| Security Scheme Type | OAuth2 |
+| clientCredentials OAuth Flow | **Token URL:** https://api.avito.ru/token<br>**Scopes:** |
+
+# [tag/Item](https://developers.avito.ru/api-catalog/item/documentation\#tag/Item) Объявления
+
+Общие методы API для работы с объявлениями на Авито
+Описание API произведено в формате [**Swagger 3.0**](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md).
+Вы можете использовать данный файл для ознакомления с методами API, а также для генерации базового
+кода для работы с API на удобном для вас языке программирования с помощью утилиты
+[**Swagger Codegen**](https://swagger.io/swagger-codegen/) или online сервиса [**Swagger Editor**](https://editor.swagger.io/).
+
+**Авито API для бизнеса предоставляется согласно [Условиям использования](https://www.avito.ru/legal/pro_tools/public-api).**
+По всем вопросам работы с API необходимо обращаться в Службу Поддержки профессиональных инструментов:
+
+телефон: **+7 495 777-10-66**
+email: [supportautoload@avito.ru](mailto:supportautoload@avito.ru)
+
+# [section/Tipy-avtorizacii](https://developers.avito.ru/api-catalog/item/documentation\#section/Tipy-avtorizacii) Типы авторизации
+
+Для использования данного API запрос должен быть авторизован. В данный момент API Авито использует следующие механизмы авторизации.
+
+## AuthorizationCode
+
+Это API использует OAuth 2 с механизмом authorization\_code. Используйте его для доступа к данным других пользователей при разработке стороннего приложения. [Подробнее](https://developers.avito.ru/api-catalog/auth/documentation#tag/ApplicationAccess)
+
+| Security Scheme Type | OAuth2 |
+| authorizationCode OAuth Flow | **Authorization URL:** https://avito.ru/oauth<br>**Token URL:** https://api.avito.ru/token<br>**Scopes:**<br>- `autoload:reports` \- <br>  Получение отчетов Автозагрузки<br>  <br>- `items:apply_vas` \- <br>  Применение дополнительных услуг<br>  <br>- `items:info` \- <br>  Получение информации об объявлениях<br>  <br>- `job:applications` \- <br>  Получение информации об откликах на вакансии<br>  <br>- `job:cv` \- <br>  Получение информации резюме<br>  <br>- `job:write` \- <br>  Изменение объявлений вертикали Работа<br>  <br>- `messenger:read` \- <br>  Чтение сообщений в мессенджере Авито<br>  <br>- `messenger:write` \- <br>  Модифицирование сообщений в мессенджере Авито<br>  <br>- `short_term_rent:read` \- <br>  Получение информации об объявлениях краткосрочной аренды<br>  <br>- `short_term_rent:write` \- <br>  Изменение объявлений краткосрочной аренды<br>  <br>- `stats:read` \- <br>  Получение статистики объявлений<br>  <br>- `user:read` \- <br>  Получение информации о пользователе<br>  <br>- `user_balance:read` \- <br>  Получение баланса пользователя<br>  <br>- `user_operations:read` \- <br>  Получение истории операций пользователя |
+
+## ClientCredentials
+
+Это API использует OAuth 2 с механизмом client\_credentials. Используйте его для доступа к возможностям своей личной учетной записи. [Подробнее](https://developers.avito.ru/api-catalog/item/documentation#tag/Access)
+
+| Security Scheme Type | OAuth2 |
+| clientCredentials OAuth Flow | **Token URL:** https://api.avito.ru/token<br>**Scopes:** |
+
+Подробнее о каждом механизме и его назначении можно прочитать в соответствующем разделе.
+
+## [operation/vasPrices](https://developers.avito.ru/api-catalog/item/documentation\#operation/vasPrices) Получение информации о стоимости услуг продвижения и доступных значках
+
+Возвращает в ответ список объектов со следующей структурой:
+
+- `itemId` – идентификатор объявления
+
+- `vas` – список объектов, которые содержат информацию о стоимости дополнительных услуг и пакетов дополнительных услуг для каждого объявления. Структура объекта:
+
+  - `slug` – идентификатор услуги или пакета услуг:
+
+    - `highlight` — [услуга продвижения "Выделить"](https://support.avito.ru/articles/200026858)
+
+    - `xl` – [услуга продвижения "XL-объявление"](https://support.avito.ru/articles/685)
+
+    - `stickerpack_x1` – [1 значок на XL-объявлении](https://support.avito.ru/articles/2450)
+
+    - `stickerpack_x2` – [2 значка на XL-объявлении](https://support.avito.ru/articles/2450)
+
+    - `stickerpack_x3` – [3 значка на XL-объявлении](https://support.avito.ru/articles/2450)
+
+    - `x2_1` – [пакет "до 2 раз больше просмотров на 1 день"](https://support.avito.ru/articles/1398)
+
+    - `x2_7` – [пакет "до 2 раз больше просмотров на 7 дней"](https://support.avito.ru/articles/1398)
+
+    - `x5_1` – [пакет "до 5 раз больше просмотров на 1 день"](https://support.avito.ru/articles/1398)
+
+    - `x5_7` – [пакет "до 5 раз больше просмотров на 7 дней"](https://support.avito.ru/articles/1398)
+
+    - `x10_1` – [пакет "до 10 раз больше просмотров на 1 день"](https://support.avito.ru/articles/1398)
+
+    - `x10_7` – [пакет "до 10 раз больше просмотров на 7 дней"](https://support.avito.ru/articles/1398)
+
+    - `x15_1` – [пакет "до 15 раз больше просмотров на 1 день"](https://support.avito.ru/articles/1398)
+
+    - `x15_7` – [пакет "до 15 раз больше просмотров на 7 дней"](https://support.avito.ru/articles/1398)
+
+    - `x20_1` – [пакет "до 20 раз больше просмотров на 1 день"](https://support.avito.ru/articles/1398)
+
+    - `x20_7` – [пакет "до 20 раз больше просмотров на 7 дней"](https://support.avito.ru/articles/1398)
+  - `price` – цена в рублях с учетом скидки
+
+  - `priceOld` – цена в рублях до применения скидки
+- `stickers` – список объектов которые содержат доступные для объявления [значки](https://support.avito.ru/articles/2450)
+
+  - `id` – идентификатор значка
+  - `title` – название значка
+  - `description` – описание значка
+
+##### Authorizations:
+
+( `items:info`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Номер пользователя в Личном кабинете Авито |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+Набор идентификаторов объявлений на сайте
+
+|     |     |
+| --- | --- |
+| itemIds<br>required | Array of integers<br>Набор идентификаторов объявлений на сайте |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**default**
+Информация об ошибке
+
+post/core/v1/accounts/{userId}/vas/prices
+
+https://api.avito.ru/core/v1/accounts/{userId}/vas/prices
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"itemIds": [\
+1234567,\
+7654321]}`
+
+### Response samples
+
+- 200
+- default
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`[\
+{\
+"itemId": 1234567,\
+"stickers": [\
+{\
+"description": "Description 1",\
+"id": 1,\
+"title": "Sticker 1"},\
+{\
+"description": "Description 2",\
+"id": 2,\
+"title": "Sticker 2"}],\
+"vas": [\
+{\
+"price": 200,\
+"priceOld": 300,\
+"slug": "x2_7"},\
+{\
+"price": 100,\
+"priceOld": 150,\
+"slug": "xl"},\
+{\
+"price": 50,\
+"priceOld": 70,\
+"slug": "stickerpack_x1"}]},\
+{\
+"itemId": 7654321,\
+"vas": [ ]}]`
+
+## [operation/postCallsStats](https://developers.avito.ru/api-catalog/item/documentation\#operation/postCallsStats) Получение статистики по звонкам
+
+Получение агрегированной статистики звонков, полученных пользователем
+
+##### Authorizations:
+
+( `items:info`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Номер пользователя в Личном кабинете Авито |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+| Content-Type<br>required | string<br>Value:"application/json"<br>Example: application/json<br>Тип данных запроса |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| dateFrom<br>required | string<br>Начальная дата периода (YYYY-MM-DD) |
+| dateTo<br>required | string<br>Конечная дата периода (YYYY-MM-DD) |
+| itemIds | Array of integers<br>Идентификаторы объявлений |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**400**
+Неверный запрос
+
+**401**
+Требуется аутентификация
+
+**404**
+Неверный user\_id в запросе
+
+**500**
+Внутренняя ошибка метода API
+
+**503**
+Метод API временно недоступен
+
+post/core/v1/accounts/{user\_id}/calls/stats/
+
+https://api.avito.ru/core/v1/accounts/{user\_id}/calls/stats/
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"dateFrom": "2020-04-01",
+"dateTo": "2020-04-08",
+"itemIds": [\
+1853257996]}`
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 404
+- 500
+- 503
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"result": {
+"items": [\
+{\
+"days": [\
+{\
+"answered": 0,\
+"calls": 0,\
+"date": "2020-04-01",\
+"new": 0,\
+"newAnswered": 0}],\
+"employeeId": 0,\
+"itemId": 1853257996}]}}`
+
+## [operation/getItemInfo](https://developers.avito.ru/api-catalog/item/documentation\#operation/getItemInfo) Получение информации по объявлению
+
+Возвращает данные об объявлении \- его статус, список примененных услуг
+
+**Внимание:** для получения статистики объявления должен использоваться метод:
+[получение статистики по списку объявлений](https://developers.avito.ru/api-catalog/item/documentation#operation/itemStatsShallow)
+
+##### Authorizations:
+
+( `items:info`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Номер пользователя в Личном кабинете Авито |
+| item\_id<br>required | integer <int64> <br>Идентификатор объявления на сайте |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**default**
+Информация об ошибке
+
+get/core/v1/accounts/{user\_id}/items/{item\_id}/
+
+https://api.avito.ru/core/v1/accounts/{user\_id}/items/{item\_id}/
+
+### Response samples
+
+- 200
+- default
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"autoload_item_id": "string",
+"finish_time": "2019-08-24T14:15:22Z",
+"start_time": "2019-08-24T14:15:22Z",
+"status": "active",
+"url": "string",
+"vas": [\
+{\
+"finish_time": "2019-08-24T14:15:22Z",\
+"schedule": [\
+"2019-08-24T14:15:22Z"],\
+"vas_id": "vip"}]}`
+
+## [operation/putItemVas](https://developers.avito.ru/api-catalog/item/documentation\#operation/putItemVas) Применение дополнительных услуг
+
+**Внимание:** метод объявлен устаревшим и больше не поддерживается. Вместо него используйте метод `/core/v2/items/{itemId}/vas/`
+
+Применение дополнительной услуги к объявлению, в ответе возвращает данные о примененной услуге и сумму списания.
+[Более подробная информация по дополнительным услугам](https://support.avito.ru/sections/200009758)
+
+**Внимание:** получение ошибки при выполнении этой операции не означает, что услуга точно не была куплена.
+В этом случае рекомендуется подождать несколько минут и проверить, что услуга отсутствует в списке применённых, а только затем повторить попытку.
+
+##### Authorizations:
+
+( `items:apply_vas`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Номер пользователя в Личном кабинете Авито |
+| item\_id<br>required | integer <int64> <br>Идентификатор объявления на сайте |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| vas\_id<br>required | string<br>Enum:"highlight""xl"<br>Идентификатор услуги, возможные его варианты значения:<br>- `highlight` — [выделение объявления](https://support.avito.ru/articles/200026858)<br>- `xl` – [XL-объявление](https://support.avito.ru/articles/685) |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**default**
+Информация об ошибке
+
+put/core/v1/accounts/{user\_id}/items/{item\_id}/vas
+
+https://api.avito.ru/core/v1/accounts/{user\_id}/items/{item\_id}/vas
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"vas_id": "highlight"}`
+
+### Response samples
+
+- 200
+- default
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"amount": 0,
+"vas": {
+"finish_time": "2019-08-24T14:15:22Z",
+"schedule": [\
+"2019-08-24T14:15:22Z"],
+"vas_id": "vip"}}`
+
+## [operation/getItemsInfo](https://developers.avito.ru/api-catalog/item/documentation\#operation/getItemsInfo) Получение информации по объявлениям
+
+Возвращает список объявлений авторизованного пользователя \- статус, категорию и ссылку на сайте.
+**Внимание! В настоящий момент этот метод не работает с объявлениями [сотрудников](https://pro.avito.ru/employees).** Он позволяет получить объявления только для пользователя, который указан владельцем этого объявления. В случае сотрудника это будет главный аккаунт компании, для авторизованного сотрудника вернётся пустой список объявлений.
+
+##### Authorizations:
+
+( `items:info`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### query Parameters
+
+|     |     |
+| --- | --- |
+| per\_page | integer <int32> <br>Default: 25<br>Example: per\_page=50<br>Количество записей на странице (целое число больше 0 и меньше 100) |
+| page | integer <int32> <br>Default: 1<br>Example: page=1<br>Номер страницы (целое число больше 0) |
+| status | string<br>Default: "active"<br>Enum:"active""removed""old""blocked""rejected"<br>Example: status=active,old<br>Статус объявления на сайте (можно указать несколько значений через запятую) |
+| updatedAtFrom | string<br>Example: updatedAtFrom=2023-12-18<br>Фильтр больше либо равно по дате обновления/редактирования объявления в формате YYYY-MM-DD |
+| category | integer <int32> <br>Example: category=111<br>Идентификатор категории объявления<br>см. возможные варианты категорий в [справочнике](https://www.avito.st/s/openapi/catalog-categories.xml) |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**default**
+Информация об ошибке
+
+get/core/v1/items
+
+https://api.avito.ru/core/v1/items
+
+### Response samples
+
+- 200
+- default
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"meta": {
+"page": 1,
+"per_page": 25},
+"resources": [\
+{\
+"address": "Москва, Лесная улица 7",\
+"category": {\
+"id": 111,\
+"name": "Вакансии"},\
+"id": 24122231,\
+"price": 35000,\
+"status": "active",\
+"title": "Продавец-кассир",\
+"url": "https://www.avito.ru/rostov-na-donu/vakansii/prodavets_magazina_2142"}]}`
+
+## [operation/putItemVasPackageV2](https://developers.avito.ru/api-catalog/item/documentation\#operation/putItemVasPackageV2) Применение пакета дополнительных услуг
+
+**Внимание:** метод объявлен устаревшим и больше не поддерживается. Вместо него используйте метод `/core/v2/items/{itemId}/vas/`
+
+Применение пакета дополнительных услуг к объявлению, в ответе возвращает сумму списания.
+
+**Внимание:** получение ошибки при выполнении этой операции не означает, что пакет точно не была куплен.
+В этом случае рекомендуется подождать несколько минут и проверить, что пакет отсутствует в списке применённых, а только затем повторить попытку.
+
+##### Authorizations:
+
+( `items:apply_vas`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Номер пользователя в Личном кабинете Авито |
+| item\_id<br>required | integer <int64> <br>Идентификатор объявления на сайте |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| package\_id<br>required | string<br>Enum:"x2\_1""x2\_7""x5\_1""x5\_7""x10\_1""x10\_7""x15\_1""x15\_7""x20\_1""x20\_7"<br>Идентификатор пакета услуг, возможные варианты значения:<br>- `x2_1` \- применение пакета До 2 раз больше просмотров на 1 день<br>- `x2_7` \- применение пакета До 2 раз больше просмотров на 7 дней<br>- `x5_1` \- применение пакета До 5 раз больше просмотров на 1 день<br>- `x5_7` \- применение пакета До 5 раз больше просмотров на 7 дней<br>- `x10_1` \- применение пакета До 10 раз больше просмотров на 1 день<br>- `x10_7` \- применение пакета До 10 раз больше просмотров на 7 дней<br>В некоторых регионах и категориях также доступны дополнительные варианты:<br>- `x15_1` \- применение пакета До 15 раз больше просмотров на 1 день<br>- `x15_7` \- применение пакета До 15 раз больше просмотров на 7 дней<br>- `x20_1` \- применение пакета До 20 раз больше просмотров на 1 день<br>- `x20_7` \- применение пакета До 20 раз больше просмотров на 7 дней<br>Если попытаться применить эти пакеты в недоступных для них регионе и категории, оплата не пройдёт. |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**default**
+Информация об ошибке
+
+put/core/v2/accounts/{user\_id}/items/{item\_id}/vas\_packages
+
+https://api.avito.ru/core/v2/accounts/{user\_id}/items/{item\_id}/vas\_packages
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"package_id": "x10_7"}`
+
+### Response samples
+
+- 200
+- default
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"amount": 0}`
+
+## [operation/applyVas](https://developers.avito.ru/api-catalog/item/documentation\#operation/applyVas) Применение услуг продвижения
+
+С помощью этого метода вы можете применить к опубликованному объявлению одну или несколько услуг продвижения (например, «XL-объявление», «Выделение цветом» и «До 10 раз больше просмотров на 7 дней»). В рамках одного запроса услуга может быть применена только один раз.
+
+Если для вашего объявления доступны значки (такие как «Без ДТП», «Срочно», «1 владелец»), при подключении услуги «XL-объявление» вы можете передать их список (не более трёх значков). В этом случае добавьте соответствующую услугу на 1, 2 или 3 значка.
+
+[Подробнее об услугах продвижения](https://support.avito.ru/partitions/131)
+
+Чтобы получить список доступных услуг и значков, используйте метод `/core/v1/accounts/{userId}/vas/prices`.
+
+Если заказ сформирован успешно, в ответ вы получите уникальные идентификаторы операций покупки для каждой из применяемых услуг. Позже эти идентификаторы можно будет использовать, чтобы узнать статус выполнения заказа.
+
+В случае некорректного запроса метод вернет код ответа 400 и структуру, содержащую поле `code`. Возможные коды ошибок:
+
+- **1001** – один или несколько заголовков неправильно передаются;
+- **1002** – ошибка в URL;
+- **1003** – неверный идентификатор объявления из запроса;
+- **1004** – JSON из тела запроса не соответствует схеме или список идентификаторов услуг пустой;
+- **1005** – объявление, к которому вы хотите применить услуги, неактивно;
+- **1006** – неправильное количество выбранных значков для объявления.
+Убедитесь, что в списке идентификаторов услуг есть услуга для покупки значков и она совпадает с количеством выбранных значков.
+  - stickerpack\_x1 – 1 значок
+  - stickerpack\_x2 – 2 значка
+  - stickerpack\_x3 – 3 значка
+- **1007** – некоторые из выбранных услуг не могут быть применены;
+- **1008** – в объявлении появились обязательные поля, которые нужно заполнить.
+Отредактируйте объявление и попробуйте применить услугу снова.
+- **1009** – в кошельке не хватает средств для покупки услуг;
+- **1010** – вы пытались купить больше одной услуги увеличения просмотров;
+- **1011** – вы пытались купить значки, недоступные для выбранного объявления.
+
+В случае внутренней ошибки на стороне Авито вернётся код ответа 500 и структура, содержащая поле `code`. Возможные коды ошибок:
+
+- **1000** – ошибка на стороне Авито, попробуйте позже или [напишите в поддержку](https://support.avito.ru/request/659?eventData%5BcontextId%5D=117);
+
+**Важно:** если ответ пришёл без кода ошибки или его значения нет в списке выше — возможно, услуга всё-таки была куплена. Подождите несколько минут: услуга продвижения появится в списке применённых, а если нет — попробуйте оформить её снова.
+
+##### Authorizations:
+
+( `items:apply_vas`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| item\_id<br>required | integer <int64> <br>Идентификатор объявления на сайте |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| slugs<br>required | Array of strings<br>Список идентификаторов услуг |
+| stickers | Array of integers<br>Список значков |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**500**
+Ответ с ошибкой
+
+put/core/v2/items/{itemId}/vas/
+
+https://api.avito.ru/core/v2/items/{itemId}/vas/
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"slugs": [\
+"x10_1",\
+"xl",\
+"stickerpack_x2"],
+"stickers": [\
+1,\
+2]}`
+
+### Response samples
+
+- 200
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"stickerpack_x2": {
+"operationId": 123456791},
+"x10_1": {
+"operationId": 123456789},
+"xl": {
+"operationId": 123456790}}`
+
+## [operation/itemStatsShallow](https://developers.avito.ru/api-catalog/item/documentation\#operation/itemStatsShallow) Получение статистики по списку объявлений
+
+Получение счетчиков по переданному списку объявлений пользователя.
+
+**Внимание:** в запросе может быть передано не более 200 идентификаторов объявлений.
+
+**Внимание:** глубина такого запроса ограничена 270 днями.
+
+### Счетчики
+
+- ~~views - общее число просмотров объявления;~~ **DEPRECATED (будет удалено в апреле 2021 г.).** Используйте поле uniqViews.
+- uniqViews - число уникальных пользователей, просмотревших объявление;
+- ~~contacts - число контактов \[1\];~~ **DEPRECATED (будет удалено в апреле 2021 г.).** Используйте поле uniqContacts.
+- uniqContacts - число уникальных пользователей, совершивших контакты \[1\];
+- ~~favorites - число добавлений объявления в "избранное";~~ **DEPRECATED (будет удалено в апреле 2021 г.).** Используйте поле uniqFavorites.
+- uniqFavorites - число уникальных пользователей, добавивших объявление в "избранное".
+
+### Группировка счетчиков
+
+Счетчики могут быть сгруппированы \[2\] по:
+
+- дням;
+- неделям \- в поле `date` соответствующей структуры будет первый день недели;
+- месяцам \- в поле `date` соответствующей структуры будет первый день месяца.
+
+#### Период группировки
+
+Период группировки передается в теле запроса в поле `periodGrouping`. Доступные значения этого поля:
+
+- "day" (по умолчанию) - без группировки;
+- "week" - суммирование счетчиков за неделю;
+- "month" - суммирование счетчиков за месяц.
+
+### Примечания
+
+- \[1\]: Под контактом понимаются: запросы телефона продавца, начатый чат с продавцом по конкретному объявлению, отклик на резюме и пр.
+- \[2\]: Группировка уникальных пользователей происходит только в рамках одного дня.
+
+##### Authorizations:
+
+( `stats:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Идентификатор пользователя (клиента) |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+| Content-Type<br>required | string<br>Value:"application/json"<br>Example: application/json<br>Тип данных запроса |
+
+##### Request Body schema: application/json
+
+Набор параметров в теле запроса.
+
+|     |     |
+| --- | --- |
+| dateFrom<br>required | string (StatisticsDateFrom) <br>Дата (в формате YYYY-MM-DD), с которой (включительно) надо получить статистику |
+| dateTo<br>required | string (StatisticsDateTo) <br>Дата (в формате YYYY-MM-DD), по которую (включительно) надо получить статистику |
+| fields | Array of strings (StatisticsFields) <br>Items Enum:"views""uniqViews""contacts""uniqContacts""favorites""uniqFavorites"<br>Набор счетчиков, которые должны присутствовать в ответе |
+| itemIds<br>required | Array of integers (StatisticsItemIDs) <br>Набор идентификаторов объявлений на сайте |
+| periodGrouping | string (StatisticsPeriodGrouping) <br>Enum:"day""week""month"<br>Период группировки |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**400**
+Неверный запрос
+
+**401**
+Требуется аутентификация
+
+**404**
+Неверный user\_id в запросе
+
+**500**
+Внутренняя ошибка метода API
+
+**503**
+Метод API временно недоступен
+
+post/stats/v1/accounts/{user\_id}/items
+
+https://api.avito.ru/stats/v1/accounts/{user\_id}/items
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"dateFrom": "2020-01-01",
+"dateTo": "2020-01-01",
+"fields": [\
+"views"],
+"itemIds": [\
+123456789,\
+987654321],
+"periodGrouping": "day"}`
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 404
+- 500
+- 503
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"result": {
+"items": [\
+{\
+"itemId": "<item_id_1>",\
+"stats": [\
+{\
+"date": "2020-06-11",\
+"uniqContacts": 1,\
+"uniqFavorites": 0,\
+"uniqViews": 10},\
+{\
+"date": "2020-06-12",\
+"uniqContacts": 0,\
+"uniqFavorites": 2,\
+"uniqViews": 7}]},\
+{\
+"itemId": "<item_id_2>",\
+"stats": [\
+{\
+"date": "2020-06-11",\
+"uniqContacts": 4,\
+"uniqFavorites": 3,\
+"uniqViews": 21},\
+{\
+"date": "2020-06-12",\
+"uniqContacts": 1,\
+"uniqFavorites": 1,\
+"uniqViews": 18}]}]}}`
+
+## [operation/itemAnalytics](https://developers.avito.ru/api-catalog/item/documentation\#operation/itemAnalytics) Получение статистических показателей по профилю
+
+Получение статистических показателей по профилю.
+
+### Группировки показателей
+
+Используйте группировки, чтобы получать конкретную статистику. Например, можете запросить только общие значения показателей, а если нужны подробности, — значения показателей по каждому объявлению или за определённый период. Доступные группировки:
+
+- **totals** — по общему значению показателя за определённый период, без детализации;
+- **item** — по объявлениям;
+- **day** — по дням;
+- **week** — по неделям;
+- **month** — по месяцам.
+
+### Доступные показатели по объявлениям
+
+#### Основные
+
+- **views** \- Просмотры. Сколько раз объявление показывалось в результатах поиска и рекомендациях. Несколько показов за сутки одному пользователю считаются как один.
+- **contacts** \- Контакты. Количество пользователей, которые посмотрели ваш номер, написали в чат или откликнулись на скидку после рассылки. Несколько контактов за сутки от одного пользователя считаются как один.
+  - **contactsShowPhone** \- Посмотрели телефон. Количество пользователей, которые посмотрели ваш телефон или нажали «Позвонить». Несколько таких действий за сутки от одного пользователя считаются как один.
+  - **contactsMessenger** \- Написали в чат. Количество пользователей, которые написали вам. Несколько чатов за сутки от одного пользователя считаются как один.
+  - **contactsShowPhoneAndMessenger** \- Посмотрели телефон и написали в чат. Количество пользователей, которые и посмотрели ваш телефон, и написали в чат. Несколько таких действий за сутки от одного пользователя считаются как один.
+  - **contactsSbcDiscount** \- Откликнулись на скидку в чате. Количество пользователей, которые приняли ваше спецпредложение после рассылки.
+- **viewsToContactsConversion** \- Конверсия из просмотров в контакты. Процент пользователей, которые после перехода в объявление посмотрели ваш телефон или написали в чат.
+- **favorites** \- Добавили в избранное. Сколько раз объявление добавили в избранное.
+- **averageViewCost** \- Средняя цена просмотра. Расходы на размещение и продвижение объявлений делятся на число просмотров.
+- **averageContactCost** \- Средняя цена контакта. Расходы на размещение и продвижение объявлений делятся на число контактов.
+- **impressions** \- Показы. Сколько раз объявление показывалось в результатах поиска и рекомендациях. Несколько показов за сутки одному пользователю считаются как один.
+- **impressionsToViewsConversion** \- Конверсия из показов в просмотры. Процент пользователей, которые перешли в объявление после того, как оно показалось в результатах поиска и рекомендациях.
+
+#### Целевые действия
+
+- **clickPackages** \- Целевые просмотры. Просмотры, которые оплачены из тарифа и считаются целевыми [по правилам Авито](https://www.avito.ru/legal/rules/paid_services/cost-per-action/#clicks).
+- **jobContacts** \- Отклики на вакансии. Отклики, которые оплачены из тарифа и считаются целевыми [по правилам Авито](https://www.avito.ru/legal/rules/paid_services/cost-per-action/#clicks).
+
+#### Заказы с Авито Доставкой
+
+- **viewsToOrderedItemsConversion** \- Конверсия из просмотров в заказанные товары. Процент пользователей, которые после перехода в объявление заказали товар.
+- **orderedItems** \- Заказано товаров. Количество товаров, которые заказали с Авито Доставкой.
+- **orderedItemsPrice** \- Стоимость заказанных товаров. Общая стоимость заказов. Это сумма, которую вы получите на руки, если клиенты примут заказы.
+- **deliveredItems** \- Доставлено товаров. Количество товаров, которые заказали с Авито Доставкой и уже приняли.
+- **deliveredItemsPrice** \- Стоимость доставленных товаров. Общая стоимость заказов, которые покупатели приняли. Это сумма, которую вы получаете на руки.
+
+#### Посуточная аренда
+
+- **bookingPlacedCount** \- Получено заявок. Общее количество заявок на бронирование
+- **bookingPlacedPrice** \- Стоимость полученных заявок. Общая стоимость бронирований. Это сумма, которую вы получите на руки, если гости заселятся.
+- **bookingApprovedCount** \- Подтверждено заявок. Количество заявок на бронирование, которые вы подтвердили.
+- **bookingApprovedPrice** \- Стоимость подтвержденных заявок. Общая стоимость бронирований, которые вы подтвердили. Это сумма, которую вы получите на руки, если гости заселятся.
+- **bookingAcceptedCount** \- Заявки с заселением. Количество бронирований, по которым заселились гости. Заселение засчитывается в 15:00 по Москве на следующий день после заезда.
+- **bookingAcceptedPrice** \- Стоимость заявок с заселением. Общая стоимость бронирований, по которым заселились гости. Это сумма, которую вы получаете на руки.
+
+#### Расходы
+
+- **allSpending** \- Все расходы. Сколько всего денег и бонусов вы потратили на объявления.
+  - **spending** \- Расходы на объявления. Сколько денег вы потратили на размещение, продвижение, целевые действия и комиссию.
+    - **presenceSpending** \- Расходы на размещение и целевые действия. Сколько денег вы потратили на размещения и целевые действия — просмотры, чаты, звонки и отклики.
+    - **promoSpending** \- Расходы на продвижение. Сколько денег вы потратили на продвижение и на услуги, которые влияют на внешний вид объявления.
+    - **restSpending** \- Остальные расходы. Сколько денег вы потратили на чат-ботов и услуги, которые система не смогла распознать.
+    - **commission** \- Комиссия. Какую комиссию вы заплатили за заказы с Авито Доставкой, которые приняли покупатели, а также за бронирования жилья.
+  - **spendingBonus** \- Списано бонусов на объявления. Сколько бонусов вы потратили на размещение, продвижение, целевые действия и комиссию.
+
+#### Количество объявлений за период
+
+- **activeItems** \- Активные объявления. Объявления, которые прошли проверку и появились в поиске.
+  - **newActiveItems** \- Новые и опубликованные заново объявления. Сколько объявлений опубликовано впервые или повторно.
+  - **oldActiveItems** \- Активны с прошлого периода. Сколько объявлений остаются опубликованными с предыдущего периода.
+
+### Примечания
+
+- Из ручки возвращается не более чем по 1000 сущностей. Вы можете использовать поля запроса limit и offset для регулировки выбранного диапазона.
+- Глубина данных статистики такого запроса ограничена 270 днями.
+- В случае недоступности метрики для пользователя она не приходит в ответе
+
+##### Authorizations:
+
+( `stats:read`) [AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| user\_id<br>required | integer <int64> <br>Идентификатор пользователя (клиента) |
+
+##### header Parameters
+
+|     |     |
+| --- | --- |
+| Authorization<br>required | string<br>Example: Bearer ACCESS\_TOKEN<br>Токен для авторизации |
+| Content-Type<br>required | string<br>Value:"application/json"<br>Example: application/json<br>Тип данных запроса |
+
+##### Request Body schema: application/json
+
+|     |     |
+| --- | --- |
+| dateFrom<br>required | string <date> <br>Дата (в формате YYYY-MM-DD), с которой (включительно) надо получить статистику |
+| dateTo<br>required | string <date> <br>Дата (в формате YYYY-MM-DD), по которую (включительно) надо получить статистику |
+| filter | object Nullable <br>Набор ограничений, по которым нужно отфильтровать данные |
+| grouping<br>required | string (Groupings) <br>Enum:"day""week""month""item""totals" |
+| limit<br>required | integer \[ 0 .. 1000 \]  Nullable <br>Инструмент пагинации для ограничения количества сущностей в response; |
+| metrics<br>required | Array of strings<br>Набор доступных показателей, которые должны присутствовать в ответе |
+| offset<br>required | integer >= 0  Nullable <br>инструмент пагинации или смещение, с которого начинается выборка данных; |
+| sort | object Nullable <br>Сортировка по заданному показателю |
+
+### Responses
+
+**200**
+Successful response
+
+**400**
+Неверный запрос
+
+**401**
+Требуется аутентификация
+
+**403**
+Доступ запрещен
+
+**429**
+Слишком много запросов
+
+**500**
+Error response
+
+post/stats/v2/accounts/{user\_id}/items
+
+https://api.avito.ru/stats/v2/accounts/{user\_id}/items
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"dateFrom": "2020-09-01",
+"dateTo": "2021-10-15",
+"filter": {
+"categoryIDs": [\
+11,\
+12],
+"employeeIDs": [\
+41042142,\
+41042143],
+"locationIDs": [\
+554353,\
+554353]},
+"grouping": "day",
+"limit": 1000,
+"metrics": [\
+"views",\
+"contacts",\
+"presenceSpending"],
+"offset": 0,
+"sort": {
+"key": "string",
+"order": "asc"}}`
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 403
+- 429
+- 500
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"result": {
+"dataTotalCount": 1,
+"groupings": [\
+{\
+"id": 1742860800,\
+"metrics": [\
+{\
+"slug": "views",\
+"value": 100},\
+{\
+"slug": "contacts",\
+"value": 100},\
+{\
+"slug": "presenceSpending",\
+"value": 1000}],\
+"type": "dates"}],
+"timestamp": "2021-11-25 15:19:21"}}`
+
+## [operation/updatePrice](https://developers.avito.ru/api-catalog/item/documentation\#operation/updatePrice) Обновление цены объявления
+
+Обновляет цену товара по id.
+Максимальное количество запросов в минуту \- 150.
+**Внимание! Доступно для категорий Товары, Запчасти, Авто, Недвижимость (кроме краткосрочной)**
+
+##### Authorizations:
+
+[AuthorizationCode](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode)[ClientCredentials](https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken)
+
+##### path Parameters
+
+|     |     |
+| --- | --- |
+| item\_id<br>required | integer <int64> <br>Идентификатор объявления на сайте |
+
+##### Request Body schema: application/json
+
+Набор параметров в теле запроса.
+
+|     |     |
+| --- | --- |
+| price<br>required | integer<br>Цена |
+
+### Responses
+
+**200**
+Успешный ответ
+
+**400**
+Неверный запрос
+
+**401**
+Требуется аутентификация
+
+**404**
+Неверный user\_id в запросе
+
+**429**
+Превышено количество запросов
+
+post/core/v1/items/{item\_id}/update\_price
+
+https://api.avito.ru/core/v1/items/{item\_id}/update\_price
+
+### Request samples
+
+- Payload
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"price": 100}`
+
+### Response samples
+
+- 200
+- 400
+- 401
+- 404
+- 429
+
+Content type
+
+application/json
+
+Copy
+Expand all  Collapse all
+
+`{
+"result": {
+"success": true}}`
+
+[Условия использования Авито](https://support.avito.ru/articles/200026948) · [Политика о данных пользователей](https://www.avito.ru/safety/personal/company) · [Условия использования API](https://developers.avito.ru/docs/APITermsOfServiceV1.pdf)
+
+Авито — сайт объявлений России. © ООО «КЕХ еКоммерц» 2007–2025.
